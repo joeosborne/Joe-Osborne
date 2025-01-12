@@ -1,0 +1,6 @@
+@Osborne.Robotics_HostAddress = http://localhost:5286
+
+GET {{Osborne.Robotics_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
