@@ -23,6 +23,8 @@ export class ForkliftFleetComponent implements OnInit {
   forklifts: any;
   onlyShowServiceableForklifts = false;
 
+  protected readonly Constants = Constants;
+
   constructor(private forkliftService: ForkliftDataService) {
     this.forklifts = this.forkliftService.forklifts;
   }
@@ -30,6 +32,4 @@ export class ForkliftFleetComponent implements OnInit {
   ngOnInit(): void {
     this.forkliftService.loadForklifts();
   }
-
-  protected readonly Constants = Constants;
 }

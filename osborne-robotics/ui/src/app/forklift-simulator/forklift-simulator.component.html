@@ -52,7 +52,7 @@
         *ngFor="let cell of warehouseGridCells; let i = index"
         class="warehouse-grid-cell"
         [ngClass]="{
-          obstacleIndicator: i === crossIndex || i === crossIndex2,
+          obstacleIndicator: i === obstacleIndex1 || i === obstacleIndex2,
           forklift: i === forkliftRenderIndex,
         }"
       ></div>

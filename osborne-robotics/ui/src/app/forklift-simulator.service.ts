@@ -59,6 +59,19 @@ export class ForkliftSimulatorService {
     return cmdResponse;
   }
 
+  private collisionHasBeenDetected(x: number, y: number): boolean {
+    return this.obstacles.some(
+      (obstacle) => obstacle.x === x && obstacle.y === y,
+    );
+  }
+
+  private clampGridBoundary(value: number): number {
+    return Math.max(
+      this.warehouseGridBoundaries.min,
+      Math.min(this.warehouseGridBoundaries.max, value),
+    );
+  }
+
   private moveForklift(
     distance: number,
     instruction: CommandInstruction,
@@ -99,18 +112,5 @@ export class ForkliftSimulatorService {
   ): void {
     cmdResponse.direction = (cmdResponse.direction + degrees + 360) % 360;
     cmdResponse.actions.push(`Turn ${action} by ${Math.abs(degrees)} degrees.`);
-  }
-
-  private collisionHasBeenDetected(x: number, y: number): boolean {
-    return this.obstacles.some(
-      (obstacle) => obstacle.x === x && obstacle.y === y,
-    );
-  }
-
-  private clampGridBoundary(value: number): number {
-    return Math.max(
-      this.warehouseGridBoundaries.min,
-      Math.min(this.warehouseGridBoundaries.max, value),
-    );
   }
 }

@@ -33,22 +33,47 @@ export class ForkliftSimulatorComponent implements OnInit {
   };
 
   // TODO: For the 10x10 grid, although the bottom left corner is (x0, y0), that cell is the 90th
-  // cell that is rendered. For the gris to be dynamic, this must be improved.
+  // cell that is rendered. For the grid to be dynamic, this must be improved.
+
   private static readonly DEFAULT_FORKLIFT_RENDER_INDEX = 90;
 
-  showInstructions = false;
-
-  crossIndex = 42;
-  crossIndex2 = 19;
-  forkliftRenderIndex =
-    ForkliftSimulatorComponent.DEFAULT_FORKLIFT_RENDER_INDEX;
-  warehouseGridCells: WarehouseGridCell[] = Array.from({ length: 100 });
-  forkliftTransform = 'translate(0px, 0px)';
   commandInstruction = this.initCommandInstruction();
   command = '';
+
+  // TODO: For now, the obstacles are hardcoded. So, obstacleIndex1 and obstacleIndex2
+  // match the following setup in the service...
+  // private readonly obstacles: WarehouseGridCell[] = [
+  //   { x: 2, y: 5 },
+  //   { x: 9, y: 8 },
+  // ];
+  // For the 10x10 grid, although the bottom left corner is (x0, y0), that cell is the 90th
+  // cell that is rendered. For the grid to be dynamic, this must be improved.
+
+  obstacleIndex1 = 42;
+  obstacleIndex2 = 19;
   errorMsg: string = '';
+  forkliftRenderIndex =
+    ForkliftSimulatorComponent.DEFAULT_FORKLIFT_RENDER_INDEX;
+  forkliftTransform = 'translate(0px, 0px)';
+  showInstructions = false;
+  warehouseGridCells: WarehouseGridCell[] = Array.from({ length: 100 });
 
   constructor(private forkliftService: ForkliftSimulatorService) {}
+
+  actionsCanBeDisplayed(): boolean {
+    return (
+      !this.errorMsg &&
+      !!this.commandInstruction?.actions &&
+      this.commandInstruction.actions.length > 0
+    );
+  }
+
+  getDirectionName(instruction: CommandInstruction): string {
+    return (
+      ForkliftSimulatorComponent.DIRECTION_NAMES[instruction?.direction] ||
+      'Unknown'
+    );
+  }
 
   getGridPosition(cmd: CommandInstruction): number {
     const size = ForkliftSimulatorComponent.GRID_SIZE;
@@ -58,6 +83,20 @@ export class ForkliftSimulatorComponent implements OnInit {
     }
 
     return (size - cmd.y - 1) * size + cmd.x;
+  }
+
+  ngOnInit(): void {
+    this.updateForkliftPosition(this.commandInstruction);
+  }
+
+  resetCommand() {
+    this.command = '';
+    this.errorMsg = '';
+    this.commandInstruction = this.initCommandInstruction();
+    this.forkliftRenderIndex =
+      ForkliftSimulatorComponent.DEFAULT_FORKLIFT_RENDER_INDEX;
+
+    this.updateForkliftPosition(this.commandInstruction);
   }
 
   runCommand(command: string | undefined) {
@@ -79,31 +118,15 @@ export class ForkliftSimulatorComponent implements OnInit {
     }
   }
 
-  getDirectionName(instruction: CommandInstruction): string {
+  toggleInstructions() {
+    this.showInstructions = !this.showInstructions;
+  }
+
+  private canProcessCommand(): boolean {
     return (
-      ForkliftSimulatorComponent.DIRECTION_NAMES[instruction?.direction] ||
-      'Unknown'
+      this.commandInstruction.actions.length > 0 &&
+      !this.commandInstruction.collisionMsg
     );
-  }
-
-  private updateForkliftPosition(cmdResponse: CommandInstruction): void {
-    const pixelX = cmdResponse.x * ForkliftSimulatorComponent.CELL_SIZE;
-    const pixelY =
-      (ForkliftSimulatorComponent.GRID_SIZE - 1 - cmdResponse.y) *
-      ForkliftSimulatorComponent.CELL_SIZE;
-    const rotation = cmdResponse.direction % 360;
-
-    this.forkliftTransform = `translate(${pixelX}px, ${pixelY}px) rotate(${rotation}deg)`;
-  }
-
-  resetCommand() {
-    this.command = '';
-    this.errorMsg = '';
-    this.commandInstruction = this.initCommandInstruction();
-    this.forkliftRenderIndex =
-      ForkliftSimulatorComponent.DEFAULT_FORKLIFT_RENDER_INDEX;
-
-    this.updateForkliftPosition(this.commandInstruction);
   }
 
   private initCommandInstruction(): CommandInstruction {
@@ -115,26 +138,13 @@ export class ForkliftSimulatorComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-    this.updateForkliftPosition(this.commandInstruction);
-  }
+  private updateForkliftPosition(cmdResponse: CommandInstruction): void {
+    const pixelX = cmdResponse.x * ForkliftSimulatorComponent.CELL_SIZE;
+    const pixelY =
+      (ForkliftSimulatorComponent.GRID_SIZE - 1 - cmdResponse.y) *
+      ForkliftSimulatorComponent.CELL_SIZE;
+    const rotation = cmdResponse.direction % 360;
 
-  actionsCanBeDisplayed(): boolean {
-    return (
-      !this.errorMsg &&
-      !!this.commandInstruction?.actions &&
-      this.commandInstruction.actions.length > 0
-    );
-  }
-
-  private canProcessCommand(): boolean {
-    return (
-      this.commandInstruction.actions.length > 0 &&
-      !this.commandInstruction.collisionMsg
-    );
-  }
-
-  toggleInstructions() {
-    this.showInstructions = !this.showInstructions;
+    this.forkliftTransform = `translate(${pixelX}px, ${pixelY}px) rotate(${rotation}deg)`;
   }
 }

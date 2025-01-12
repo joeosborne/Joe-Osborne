@@ -17,7 +17,12 @@ export interface Forklift {
 export class ForkliftDataService {
   // TODO: strongly type this forklift data going in and out of API. Use Forklift interface for this.
   forklifts = signal<any>({});
+
   constructor(private http: HttpClient) {}
+
+  forkLiftRequiresAService(forklifts: Forklift): boolean {
+    return forklifts.age > Constants.SERVICE_REQUIRED_THRESHOLD;
+  }
 
   loadForklifts() {
     this.http.get<any>(Constants.API_FORKLIFTS_GET_ALL).subscribe((x) => {
@@ -28,10 +33,6 @@ export class ForkliftDataService {
       }));
       this.forklifts.set(forklifts);
     });
-  }
-
-  forkLiftRequiresAService(forklifts: Forklift): boolean {
-    return forklifts.age > Constants.SERVICE_REQUIRED_THRESHOLD;
   }
 
   uploadFile(file: File): Observable<any> {
