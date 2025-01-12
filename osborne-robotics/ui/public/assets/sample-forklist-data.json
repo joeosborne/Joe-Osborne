@@ -1,0 +1,107 @@
+[
+  {
+    "Name": "Crimson Lift",
+    "ModelNumber": "CL-101",
+    "ManufacturingDate": "2022-03-15"
+  },
+  {
+    "Name": "Azure Mover",
+    "ModelNumber": "AM-203",
+    "ManufacturingDate": "2021-07-11"
+  },
+  {
+    "Name": "Emerald Carrier",
+    "ModelNumber": "EC-305",
+    "ManufacturingDate": "2023-01-22"
+  },
+  {
+    "Name": "Amber Hauler",
+    "ModelNumber": "AH-407",
+    "ManufacturingDate": "2020-10-05"
+  },
+  {
+    "Name": "Sapphire Loader",
+    "ModelNumber": "SL-509",
+    "ManufacturingDate": "2019-04-16"
+  },
+  {
+    "Name": "Onyx Lifter",
+    "ModelNumber": "OL-611",
+    "ManufacturingDate": "2022-12-19"
+  },
+  {
+    "Name": "Ivory Transporter",
+    "ModelNumber": "IT-713",
+    "ManufacturingDate": "2021-06-24"
+  },
+  {
+    "Name": "Ruby Hoist",
+    "ModelNumber": "RH-815",
+    "ManufacturingDate": "2020-03-29"
+  },
+  {
+    "Name": "Topaz Lift",
+    "ModelNumber": "TL-917",
+    "ManufacturingDate": "2023-07-18"
+  },
+  {
+    "Name": "Silver Carrier",
+    "ModelNumber": "SC-019",
+    "ManufacturingDate": "2019-09-12"
+  },
+  {
+    "Name": "Gold Loader",
+    "ModelNumber": "GL-121",
+    "ManufacturingDate": "2021-05-30"
+  },
+  {
+    "Name": "Platinum Hauler",
+    "ModelNumber": "PH-223",
+    "ManufacturingDate": "2020-11-08"
+  },
+  {
+    "Name": "Bronze Lifter",
+    "ModelNumber": "BL-325",
+    "ManufacturingDate": "2022-08-14"
+  },
+  {
+    "Name": "Lilac Mover",
+    "ModelNumber": "LM-427",
+    "ManufacturingDate": "2019-12-21"
+  },
+  {
+    "Name": "Turquoise Transporter",
+    "ModelNumber": "TT-529",
+    "ManufacturingDate": "2021-03-03"
+  },
+  {
+    "Name": "Pearl Loader",
+    "ModelNumber": "PL-631",
+    "ManufacturingDate": "2020-01-19"
+  },
+  {
+    "Name": "Violet Lift",
+    "ModelNumber": "VL-733",
+    "ManufacturingDate": "2023-05-05"
+  },
+  {
+    "Name": "Indigo Carrier",
+    "ModelNumber": "IC-835",
+    "ManufacturingDate": "2022-02-10"
+  },
+  {
+    "Name": "Magenta Hoist",
+    "ModelNumber": "MH-937",
+    "ManufacturingDate": "2021-08-22"
+  },
+  {
+    "Name": "Cobalt Loader",
+    "ModelNumber": "CL-039",
+    "ManufacturingDate": "2020-04-09"
+  },
+  {
+    "Name": "Ochre Hauler",
+    "ModelNumber": "OH-141",
+    "ManufacturingDate": "2019-06-28"
+  }
+]

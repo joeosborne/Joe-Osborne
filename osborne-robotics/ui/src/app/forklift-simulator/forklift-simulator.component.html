@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="column simulator-instructions">
+    <button class="btn btn-primary" (click)="toggleInstructions()">
+      @if (showInstructions) {
+        Hide Instructions
+      } @else {
+        Show Instructions
+      }
+    </button>
+    @if (showInstructions) {
+      <div>
+        <p class="text-md-start text-primary">Instructions..</p>
+        <p class="text-md-start text-primary">
+          F (Forward) and B (Backward) are followed by a number indicating how
+          many units to move. L (Left) and R (Right) are followed by a number
+          indicating how many degrees to turn. A Left turn rotates the forklift
+          counterclockwise. A Right turn rotates the forklift clockwise. Degrees
+          must be between 0 and 360. Ensure the degrees are multiples of 90
+          (i.e., 90, 180, 270).
+        </p>
+        <p class="text-md-start text-primary">Example..</p>
+        <p class="text-md-start text-primary">Input: F8R90L90B5</p>
+        <p class="text-md-start text-primary">Output:</p>
+        <p class="text-md-start text-primary">
+          Move Forward by 8 metres. Turn Right by 90 degrees. Turn Left by 90
+          degrees. Move Backward by 5 metres.
+        </p>
+      </div>
+    }
+    <div>
+      <input
+        [(ngModel)]="command"
+        class="m-2 command-input"
+        placeholder="Enter commands here"
+      />
+      <div>
+        <button (click)="resetCommand()" class="btn btn-secondary m-2">
+          Reset
+        </button>
+        <button (click)="runCommand(command)" class="btn btn-primary m-2">
+          Execute
+        </button>
+      </div>
+      <h3 *ngIf="errorMsg" class="mt-3 text-s text-danger">
+        {{ errorMsg }}
+      </h3>
+    </div>
+  </div>
+  <div class="column">
+    <div class="warehouse-grid">
+      <div
+        *ngFor="let cell of warehouseGridCells; let i = index"
+        class="warehouse-grid-cell"
+        [ngClass]="{
+          obstacleIndicator: i === crossIndex || i === crossIndex2,
+          forklift: i === forkliftRenderIndex,
+        }"
+      ></div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card mt-3">
+      @if (actionsCanBeDisplayed()) {
+        <div class="card-body">
+          <h4 class="card-title">Actions:</h4>
+          <ul class="list-group mb-3">
+            <li
+              class="list-group-item"
+              *ngFor="let action of commandInstruction?.actions"
+            >
+              {{ action }}
+            </li>
+          </ul>
+          <p class="mb-2">
+            <strong>Final Position:</strong>
+            <span class="text-primary"
+              >({{ commandInstruction?.x }}, {{ commandInstruction?.y }})</span
+            >
+          </p>
+          <p class="mb-0">
+            <strong>Facing:</strong>
+            <span class="text-success">{{
+              getDirectionName(commandInstruction)
+            }}</span>
+          </p>
+        </div>
+      } @else {
+        <p class="text-md-start">No actions to display</p>
+      }
+    </div>
+  </div>
+</div>

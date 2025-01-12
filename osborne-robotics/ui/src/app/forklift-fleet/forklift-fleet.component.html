@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="column">
+    <div>
+      <app-file-upload></app-file-upload>
+    </div>
+    <p class="text-md-start">
+      The fleet of Forklifts displayed on the right hand side represent the
+      latest data. This can be updated by importing a valid JSON file above.
+    </p>
+    <p class="text-md-start">
+      Any forklifts that are older than
+      {{ Constants.SERVICE_REQUIRED_THRESHOLD }} years are due for a service.
+      The forklifts are displayed in
+      <span style="color: red">red</span>
+    </p>
+  </div>
+  <div class="column">
+    <div class="form-check m-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="flexCheckDefault"
+        [(ngModel)]="onlyShowServiceableForklifts"
+      />
+      <label class="form-check-label" for="flexCheckDefault">
+        Only show forklifts that are due for service
+      </label>
+    </div>
+
+    <div *ngIf="!!forklifts().length">
+      <div *ngFor="let forklift of forklifts()">
+        @if (onlyShowServiceableForklifts) {
+          @if (forklift.dueForAService) {
+            <div>
+              Name: {{ forklift.name }}, Model: {{ forklift.modelNumber }}, Age:
+              {{ forklift.age ?? "N/A" }}
+            </div>
+          }
+        } @else {
+          <div [ngStyle]="{ color: forklift.dueForAService ? 'red' : 'black' }">
+            Name: {{ forklift.name }}, Model: {{ forklift.modelNumber }}, Age:
+            {{ forklift.age ?? "N/A" }}
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

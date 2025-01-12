@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+}
+
+.simulator-instructions {
+  min-width: 280px;
+}
+
+.command-input {
+  width: 90%;
+}
+
+.warehouse-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+  grid-gap: 1px;
+  position: relative;
+  margin: auto;
+  border: 1px solid #333;
+}
+
+.warehouse-grid-cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.obstacleIndicator {
+  position: relative;
+}
+
+.obstacleIndicator::before,
+.obstacleIndicator::after {
+  content: "";
+  position: absolute;
+  background-color: red;
+}
+
+.obstacleIndicator::before {
+  width: 80%;
+  height: 10%;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+}
+
+.obstacleIndicator::after {
+  width: 10%;
+  height: 80%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.forklift {
+  position: relative;
+}
+
+.forklift::before,
+.forklift::after {
+  content: "";
+  position: absolute;
+  background-color: green;
+}
+
+.forklift::before {
+  width: 80%;
+  height: 10%;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+}
+
+.forklift::after {
+  width: 10%;
+  height: 80%;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}

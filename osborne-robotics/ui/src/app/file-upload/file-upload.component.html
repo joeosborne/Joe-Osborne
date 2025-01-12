@@ -1,0 +1,18 @@
+<div>
+  <div class="mb-3">
+    <label for="fileInput" class="text-s text-primary"
+      >Choose a file to upload:</label
+    >
+    <input
+      type="file"
+      id="fileInput"
+      class="form-control"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+
+  <button class="btn btn-primary" (click)="upload()">Upload</button>
+
+  <p *ngIf="message" class="mt-3 text-s text-success">{{ message }}</p>
+  <p *ngIf="errorMsg" class="mt-3 text-s text-danger">{{ errorMsg }}</p>
+</div>
